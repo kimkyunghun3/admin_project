@@ -15,8 +15,6 @@ public class PostController {
     @PostMapping(value = "/postMethod") //http post body -> data 넣어서 보내겠다
     public SearchParam postMethod(@RequestBody SearchParam searchParam){
 
-
-
         return searchParam;
     }
 }
