@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class UserRepositoryTest extends StudyApplicationTests {
 
@@ -26,10 +27,33 @@ public class UserRepositoryTest extends StudyApplicationTests {
         User newUser = userRepository.save(user);
         System.out.println("newUser: " + newUser);
     }
+
+    @Test
     public void read(){
+        Optional<User> user = userRepository.findById(2L);       //userRepository를 불러서 CRUD 구현할 수 있도록 만든다
+
+        user.ifPresent(selectUser -> {
+            System.out.println("user : "+selectUser);
+            System.out.println("email : "+ selectUser.getEmail());
+        });
+    }
+
+    @Test
+    public void update(){
+        Optional<User> user = userRepository.findById(2L);
+
+        user.ifPresent(selectUser -> {
+            selectUser.setAccount("pppp");
+            selectUser.setUpdatedAt(LocalDateTime.now());
+            selectUser.setUpdatedBy("update method(");
+
+            userRepository.save(selectUser);
+
+        });
 
     }
-    public void update(){
+
+    public void delete(){
 
     }
 
