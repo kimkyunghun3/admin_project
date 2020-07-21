@@ -37,7 +37,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     @Test
     @Transactional
     public void read(){
-        Optional<User> user = userRepository.findById(4L);       //userRepository를 불러서 CRUD 구현할 수 있도록 만든다
+        Optional<User> user = userRepository.findByAccount("TestUser03");       //userRepository를 불러서 CRUD 구현할 수 있도록 만든다
 
         user.ifPresent(selectUser -> {
 
