@@ -7,6 +7,11 @@ import com.example.study.model.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
+
+import org.junit.Assert;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -53,8 +58,26 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     }
 
+    @Test
+    @Transactional      //Test는 돌아가는데 칼럼에서는 삭제가 안된다. (Rolled back 된다)
     public void delete(){
+        Optional<User> user = userRepository.findById(3L);
 
+        Assert.assertTrue(user.isPresent());
+
+        user.ifPresent(selectUser -> {
+            userRepository.delete(selectUser);
+
+        });
+
+        Optional<User> deleteUser = userRepository.findById(3L);
+
+        Assert.assertFalse(deleteUser.isPresent());
+
+        if(deleteUser.isPresent()){
+            System.out.println("데이터 존재 : "+ deleteUser.get());
+        }else{
+            System.out.println("데이터 삭제 데이터 없음");
+        }
     }
-
 }
