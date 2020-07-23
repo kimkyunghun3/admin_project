@@ -19,6 +19,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String account;
+    private String password;
+
+    private String status;
+
+    private LocalDateTime registeredAt;
+    private LocalDateTime unregisteredAt;
+
     private String email;
     private String phoneNumber;
     private LocalDateTime createdAt;
@@ -26,7 +33,7 @@ public class User {
     private LocalDateTime updatedAt;
     private String updatedBy;
 
-    // 1: N
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")       //OrderDetail 클래스에서 mappedBy(어떤 변수에 매칭 시킬것 이라는 뜻)는 User에서 선언한 user로 동일하게 적어야 된다.
-    private List<OrderDetail> orderDetailList; //List로 받아온다
+//    // 1: N
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")       //OrderDetail 클래스에서 mappedBy(어떤 변수에 매칭 시킬것 이라는 뜻)는 User에서 선언한 user로 동일하게 적어야 된다.
+//    private List<OrderDetail> orderDetailList; //List로 받아온다
 }
