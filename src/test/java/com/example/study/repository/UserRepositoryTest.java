@@ -23,29 +23,44 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     @Test
     public void create(){           //Hihernate의 장점.. 쿼리문 없이 객체 생성이 가능하게 된다.
+        String account ="Test01";
+        String password = "Test01";
+        String status = "REGISTERED";
+        String email = "Test01@gmail.com";
+        String phoneNumber = "010-1111-2222";
+        LocalDateTime registeredAt =LocalDateTime.now();
+        LocalDateTime createdAt = LocalDateTime.now();
+        String createdBy = "AdminServer";
+
         User user = new User();
-        user.setAccount("TestUser03");
-        user.setEmail("TestUser03@gamail.com");
-        user.setPhoneNumber("010-3333-1111");
-        user.setCreatedAt(LocalDateTime.now());
-        user.setCreatedBy("TestUser3");
+        user.setAccount(account);
+        user.setPassword(password);
+        user.setStatus(status);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        user.setRegisteredAt(registeredAt);
+        user.setCreatedBy(createdBy);
+        user.setCreatedAt(createdAt);
 
         User newUser = userRepository.save(user);
-        System.out.println("newUser: " + newUser);
+        Assert.assertNotNull(newUser);
+
     }
 
     @Test
     @Transactional
     public void read(){
-        Optional<User> user = userRepository.findByAccount("TestUser03");       //userRepository를 불러서 CRUD 구현할 수 있도록 만든다
-
-        user.ifPresent(selectUser -> {
-
-            selectUser.getOrderDetailList().stream().forEach(detail -> {        //List 형식으로 가져오므로 stream과 foreach로 만들어서 보여준다.
-                Item item = detail.getItem();
-                System.out.println(item);
-            });
-        });
+//        Optional<User> user = userRepository.findByAccount("TestUser03");       //userRepository를 불러서 CRUD 구현할 수 있도록 만든다
+//
+//        user.ifPresent(selectUser -> {
+//
+//            selectUser.getOrderDetailList().stream().forEach(detail -> {        //List 형식으로 가져오므로 stream과 foreach로 만들어서 보여준다.
+//                Item item = detail.getItem();
+//                System.out.println(item);
+//            });
+//        });
+        User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-1111-2222");    //이 번호가 있으면 조회된다.
+        Assert.assertNotNull(user); //assert로 user가 있어야된다고 한다.
     }
 
     @Test

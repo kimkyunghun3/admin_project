@@ -9,7 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-//
+
+    User findFirstByPhoneNumberOrderByIdDesc(String phoneNumber);
+
 //    // select * from user where account = ? << test03, test04
 //    Optional<User> findByAccount(String account); //JPA 에서는 Select문 인것을 findBy를 보고 알게 되고 account와 매칭을 시켜 account에 들어가는 값이 들어간다.
 //
