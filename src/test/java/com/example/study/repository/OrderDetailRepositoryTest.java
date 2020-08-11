@@ -29,10 +29,10 @@ public class OrderDetailRepositoryTest extends StudyApplicationTests {
 
 
         // 어떤 사람?
-        orderDetail.setOrderGroupId(1L);    //어떠한 장바구니에
+        //orderDetail.setOrderGroupId(1L);    //어떠한 장바구니에
 
         // 어떤 상품?
-        orderDetail.setItemId(1L);      //어떠한 상품
+        //orderDetail.setItemId(1L);      //어떠한 상품
 
         OrderDetail newOrderDetail = orderDetailRepository.save(orderDetail);
         Assert.assertNotNull(newOrderDetail);
