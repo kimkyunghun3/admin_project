@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity //Order_detail 테이블에 자동적으로 연결이 된다.
-@ToString(exclude = {"orderGroup"})           //lombok 쓰면 toString 만드는데 이 부분을 user와 OrderDetail가 상호참조하고 있기 떄문에 Overflow 에러가 난다. 그러므로 이를 뺴야 한다. user, item 연관관계 잇는거에대해서는 이처럼 빼줘야 함!
+@ToString(exclude = {"orderGroup","item"})           //lombok 쓰면 toString 만드는데 이 부분을 user와 OrderDetail가 상호참조하고 있기 떄문에 Overflow 에러가 난다. 그러므로 이를 뺴야 한다. user, item 연관관계 잇는거에대해서는 이처럼 빼줘야 함!
 public class OrderDetail {
 
     @Id
@@ -37,7 +37,8 @@ public class OrderDetail {
     private LocalDateTime updatedAt;
     private String updatedBy;
 
-    private Long itemId;            //외래키에 대한 설정
+    //OrderDetail N : 1 Item
+    private Item item;            //외래키에 대한 설정
 
     // OrderDetail N : 1 OrderGroup
     @ManyToOne
