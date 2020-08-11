@@ -30,12 +30,17 @@ public class OrderDetail {
 
     private BigDecimal totalPrice;
 
-    private LocalDateTime orderAt;
+
 
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
+
+    private Long itemId;            //외래키에 대한 설정
+
+    private Long orderGroupId;
+
 }
 
 //    //OrderDetail (N) : user(1) 항상 본인을 기준으로 만든다!
